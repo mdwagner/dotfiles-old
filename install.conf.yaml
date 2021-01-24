@@ -1,0 +1,39 @@
+- defaults:
+    link:
+      relink: true
+      create: true
+
+- clean:
+    ~/
+    ~/.config
+
+- create:
+    - ~/.ssh
+    - ~/git
+    - ~/documents
+    - ~/downloads
+
+- link:
+    # nvim
+    ~/.config/nvim/init.vim: nvim/init.vim
+    ~/.local/share/nvim/site/autoload/plug.vim:
+      path: nvim/vim-plug/plug.vim
+      force: true
+
+    # fish
+    ~/.config/fish/config.fish: fish/config.fish
+    ~/.config/fish/functions: fish/functions
+    ~/.config/fish/completions: fish/completions
+
+    # asdf
+    ~/.asdf:
+      path: asdf
+      force: true
+    ~/.tool-versions: tool-versions/.tool-versions
+
+    # npm
+    ~/.npmrc: npmrc/.npmrc
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+    - [cp -n gitconfig/.gitconfig ~/, Copying default .gitconfig (unless exists)]
